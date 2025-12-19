@@ -38,7 +38,7 @@ namespace DFA_EFC_MVC_WebApp.Controllers
 
             if (product == null)
                 return NotFound();
-
+            TempData["info"] = "Product info!";
             return View(product);
         }
 
@@ -63,7 +63,7 @@ namespace DFA_EFC_MVC_WebApp.Controllers
 
                 _context.Add(product);
                 await _context.SaveChangesAsync(); // Save to database
-
+                TempData["success"] = "Product created successfully!";
                 return RedirectToAction(nameof(Index)); // Redirect to Index action to show the list of products
             }
 
@@ -111,7 +111,7 @@ namespace DFA_EFC_MVC_WebApp.Controllers
                     else
                         throw;
                 }
-
+                TempData["warn"] = "Product updated successfully!";
                 return RedirectToAction(nameof(Index)); // Return to Index view 
             }
 
@@ -149,7 +149,7 @@ namespace DFA_EFC_MVC_WebApp.Controllers
                 _context.Products1.Remove(product);
                 await _context.SaveChangesAsync();
             }
-
+            TempData["error"] = "Product delete successfully!";
             return RedirectToAction(nameof(Index));
         }
 

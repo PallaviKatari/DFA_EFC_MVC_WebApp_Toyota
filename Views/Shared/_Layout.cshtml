@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DFA_EFC_MVC_WebApp.styles.css" asp-append-version="true" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+          integrity="sha512-..."
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+
 </head>
 <body>
     <header>
@@ -49,5 +56,59 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Swal - Sweetalert
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000, // 3seconds
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const success = '@TempData["success"]';
+            const error = '@TempData["error"]';
+            const info = '@TempData["info"]';
+            const warn='@TempData["warn"]';
+
+            if (success) {
+                Toast.fire({
+                    icon: 'success',
+                    title: success
+                });
+            }
+
+            if (error) {
+                Toast.fire({
+                    icon: 'error',
+                    title: error
+                });
+            }
+
+            if (info) {
+                Toast.fire({
+                    icon: 'info',
+                    title: info
+                });
+            }
+
+            if (warn) {
+                Toast.fire({
+                    icon: 'warning',
+                    title: warn
+                });
+            }
+        });
+    </script>
+
+
 </body>
 </html>
